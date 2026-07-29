@@ -1,17 +1,14 @@
 package com.danielwolski.devboard.kafka.events;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Data
-@Getter
-@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class BugReportReceivedEvent {
+    private String uuid;
     private String summary;
     private String description;
     private String gameVersion;

@@ -16,8 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReportService {
 
-    ReportRepository reportRepository;
-    BugReportMapper bugReportMapper;
+    private final ReportRepository reportRepository;
+    private final BugReportMapper bugReportMapper;
 
     public List<BugReportDto> getBugReportDtos() {
         List<BugReport> bugReportList = reportRepository.findAll();
@@ -28,7 +28,11 @@ public class ReportService {
 
     public void saveNewBugReportEvent(BugReportReceivedEvent bugReportReceivedEvent) {
         BugReport bugReport = bugReportMapper.bugReportReceivedEventToBugReport(bugReportReceivedEvent);
-        reportRepository.save(bugReport);
-        log.info("Saved new bug report");
+        try {
+            reportRepository.save(bugReport);
+            log.info("Saved new bug report");
+        } catch (Exception e) {
+            log.warn("Error saving {} ", e.getMessage());
+        }
     }
 }

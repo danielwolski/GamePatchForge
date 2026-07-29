@@ -5,11 +5,9 @@ import com.danielwolski.devboard.kafka.events.BugReportReceivedEvent;
 import com.danielwolski.devboard.reports.model.BugReport;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface BugReportMapper {
     BugReportDto bugReportToBugReportDto(BugReport bugReport);
-//    BugReport bugReportDtoToBugReport(BugReportDto bugReportDto);
 
-//    BugReportReceivedEvent bugReportToBugReportReceivedEvent(BugReport bugReport);
     BugReport bugReportReceivedEventToBugReport(BugReportReceivedEvent bugReportReceivedEvent);
 }

@@ -3,7 +3,6 @@ package com.danielwolski.devboard.reports.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BugReport {
     @Id
+    private String uuid;
     private String summary;
     private String description;
     private String gameVersion;
