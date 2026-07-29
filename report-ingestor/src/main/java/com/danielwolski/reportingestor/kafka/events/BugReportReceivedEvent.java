@@ -1,14 +1,18 @@
-package com.danielwolski.reportingestor.reports.events;
+package com.danielwolski.reportingestor.kafka.events;
 
 import com.danielwolski.reportingestor.reports.dto.BugReportDto;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-public class BugReportEvent {
+@AllArgsConstructor
+public class BugReportReceivedEvent {
+    private String uuid;
     private String summary;
     private String description;
     private String gameVersion;
@@ -18,7 +22,8 @@ public class BugReportEvent {
     private long ram;
     private List<String> fileUrls;
 
-    public BugReportEvent(BugReportDto report, List<String> fileUrls) {
+    public BugReportReceivedEvent(BugReportDto report, List<String> fileUrls) {
+        this.uuid =  UUID.randomUUID().toString();
         this.summary = report.summary();
         this.description = report.description();
         this.gameVersion = report.gameVersion();

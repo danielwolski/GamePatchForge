@@ -1,5 +1,6 @@
 package com.danielwolski.reportingestor.kafka;
 
+import com.danielwolski.reportingestor.kafka.events.BugReportReceivedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,12 +12,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class KafkaEventPublisher {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, BugReportReceivedEvent> kafkaTemplate;
 
     @Value("${app.kafka.topics.reports}")
     private String reportsTopic;
 
-    public void publishEvent(String key, String message) {
+    public void publishEvent(String key, BugReportReceivedEvent message) {
         log.debug("Initiating event send to topic '{}' with key '{}'", reportsTopic, key);
 
         kafkaTemplate.send(reportsTopic, key, message)

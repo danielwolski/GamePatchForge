@@ -1,8 +1,8 @@
 package com.danielwolski.reportingestor.reports;
 
 import com.danielwolski.reportingestor.kafka.KafkaEventPublisher;
+import com.danielwolski.reportingestor.kafka.events.BugReportReceivedEvent;
 import com.danielwolski.reportingestor.reports.dto.BugReportDto;
-import com.danielwolski.reportingestor.reports.events.BugReportEvent;
 import com.danielwolski.reportingestor.storage.StorageService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +36,7 @@ class ReportServiceTest {
 
     @BeforeEach
     void setUp() {
-        reportService = new ReportService(storageService, kafkaEventPublisher, objectMapper);
+        reportService = new ReportService(storageService, kafkaEventPublisher);
     }
 
     @Test
@@ -53,7 +53,7 @@ class ReportServiceTest {
         when(storageService.store(any(MultipartFile.class))).thenReturn(expectedLogUrl, expectedImageUrl);
 
         ArgumentCaptor<String> keyCaptor = ArgumentCaptor.forClass(String.class);
-        ArgumentCaptor<String> eventCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<BugReportReceivedEvent> eventCaptor = ArgumentCaptor.forClass(BugReportReceivedEvent.class);
 
         // When
         reportService.ingestBugReport(bugReportDto, files);
@@ -65,28 +65,9 @@ class ReportServiceTest {
         String publishedKey = keyCaptor.getValue();
         assertThat(publishedKey).isNotNull().isNotEmpty();
 
-        String publishedEventJson = eventCaptor.getValue();
-        BugReportEvent publishedEvent = objectMapper.readValue(publishedEventJson, BugReportEvent.class);
+        BugReportReceivedEvent publishedEvent = eventCaptor.getValue();
 
         assertThat(publishedEvent.getSummary()).isEqualTo(bugReportDto.summary());
         assertThat(publishedEvent.getFileUrls()).containsExactlyInAnyOrder(expectedLogUrl, expectedImageUrl);
-    }
-
-    @Test
-    void ingestBugReport_shouldNotPublishEventWhenSerializationFails() throws JsonProcessingException {
-        // Given
-        var bugReportDto = new BugReportDto("Test", "Test", "1.0", "OS", "CPU", "GPU", 8L);
-        List<MultipartFile> files = List.of(new MockMultipartFile("file", "file.txt", "text/plain", "content".getBytes()));
-
-        ObjectMapper failingMapper = mock(ObjectMapper.class);
-        when(failingMapper.writeValueAsString(any())).thenThrow(new JsonProcessingException("Serialization failed") {});
-
-        reportService = new ReportService(storageService, kafkaEventPublisher, failingMapper);
-
-        // When
-        reportService.ingestBugReport(bugReportDto, files);
-
-        // Then
-        verify(kafkaEventPublisher, never()).publishEvent(anyString(), anyString());
     }
 }
