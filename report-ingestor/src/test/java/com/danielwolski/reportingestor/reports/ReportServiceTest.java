@@ -1,7 +1,7 @@
 package com.danielwolski.reportingestor.reports;
 
 import com.danielwolski.reportingestor.kafka.KafkaEventPublisher;
-import com.danielwolski.reportingestor.reports.dto.BugReport;
+import com.danielwolski.reportingestor.reports.dto.BugReportDto;
 import com.danielwolski.reportingestor.reports.events.BugReportEvent;
 import com.danielwolski.reportingestor.storage.StorageService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,7 +42,7 @@ class ReportServiceTest {
     @Test
     void ingestBugReport_shouldStoreFilesAndPublishEventWithKey() throws Exception {
         // Given
-        var bugReportDto = new BugReport("Crash on startup", "Game crashes", "1.0", "Win10", "i7", "RTX 3080", 16L);
+        var bugReportDto = new BugReportDto("Crash on startup", "Game crashes", "1.0", "Win10", "i7", "RTX 3080", 16L);
         List<MultipartFile> files = List.of(
                 new MockMultipartFile("log", "log.txt", "text/plain", "log content".getBytes()),
                 new MockMultipartFile("screenshot", "screenshot.png", "image/png", "image content".getBytes())
@@ -75,7 +75,7 @@ class ReportServiceTest {
     @Test
     void ingestBugReport_shouldNotPublishEventWhenSerializationFails() throws JsonProcessingException {
         // Given
-        var bugReportDto = new BugReport("Test", "Test", "1.0", "OS", "CPU", "GPU", 8L);
+        var bugReportDto = new BugReportDto("Test", "Test", "1.0", "OS", "CPU", "GPU", 8L);
         List<MultipartFile> files = List.of(new MockMultipartFile("file", "file.txt", "text/plain", "content".getBytes()));
 
         ObjectMapper failingMapper = mock(ObjectMapper.class);

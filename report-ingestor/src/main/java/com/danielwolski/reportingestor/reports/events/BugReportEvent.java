@@ -1,6 +1,6 @@
 package com.danielwolski.reportingestor.reports.events;
 
-import com.danielwolski.reportingestor.reports.dto.BugReport;
+import com.danielwolski.reportingestor.reports.dto.BugReportDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +18,7 @@ public class BugReportEvent {
     private long ram;
     private List<String> fileUrls;
 
-    public BugReportEvent(BugReport report, List<String> fileUrls) {
+    public BugReportEvent(BugReportDto report, List<String> fileUrls) {
         this.summary = report.summary();
         this.description = report.description();
         this.gameVersion = report.gameVersion();

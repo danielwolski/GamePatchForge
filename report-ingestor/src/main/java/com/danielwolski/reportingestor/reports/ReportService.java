@@ -1,7 +1,7 @@
 package com.danielwolski.reportingestor.reports;
 
 import com.danielwolski.reportingestor.kafka.KafkaEventPublisher;
-import com.danielwolski.reportingestor.reports.dto.BugReport;
+import com.danielwolski.reportingestor.reports.dto.BugReportDto;
 import com.danielwolski.reportingestor.reports.events.BugReportEvent;
 import com.danielwolski.reportingestor.storage.StorageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +23,7 @@ public class ReportService {
     private final KafkaEventPublisher kafkaEventPublisher;
     private final ObjectMapper objectMapper;
 
-    public void ingestBugReport(BugReport report, List<MultipartFile> files) {
+    public void ingestBugReport(BugReportDto report, List<MultipartFile> files) {
         List<String> fileUrls = files.stream()
                 .map(storageService::store)
                 .collect(Collectors.toList());
