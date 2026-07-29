@@ -1,6 +1,6 @@
-package com.danielwolski.reportingestor.reports.dto;
+package com.danielwolski.devboard.reports.dto;
 
-public record BugReport(
+public record BugReportDto(
     String summary,
     String description,
     String gameVersion,
