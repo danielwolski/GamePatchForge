@@ -1,0 +1,12 @@
+<section class="report-detail-view">
+  @if (isLoading) { <div class="empty-state"><span class="loader"></span><p>Loading report details...</p></div> }
+  @else if (hasError || !report) { <div class="empty-state error-state"><span class="empty-icon">!</span><h2>Report not found</h2><p>We could not load this report from the telemetry service.</p><a class="primary-button" routerLink="/reports">Back to reports</a></div> }
+  @else {
+    <a class="back-link" routerLink="/reports"><span>←</span> Back to all reports</a>
+    <div class="detail-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span>Bug report</p><h1>{{ report.summary }}</h1><p class="detail-id">{{ report.uuid }}</p></div><span class="version-chip large-chip">v{{ report.gameVersion }}</span></div>
+    <div class="detail-layout">
+      <article class="description-panel"><p class="panel-label">Player description</p><p class="full-description">{{ report.description }}</p></article>
+      <section class="hardware-panel"><p class="panel-label">Environment snapshot</p><dl><div><dt>Operating system</dt><dd>{{ report.os }}</dd></div><div><dt>Processor</dt><dd>{{ report.cpu }}</dd></div><div><dt>Graphics card</dt><dd>{{ report.gpu }}</dd></div><div><dt>Memory</dt><dd>{{ report.ram }} GB RAM</dd></div><div><dt>Game version</dt><dd>{{ report.gameVersion }}</dd></div></dl></section>
+    </div>
+  }
+</section>

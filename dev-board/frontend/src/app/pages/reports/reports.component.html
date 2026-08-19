@@ -1,0 +1,20 @@
+<section class="reports-view">
+  <div class="view-heading">
+    <div><h1>Bug reports</h1><p class="view-subtitle">Issues submitted by players</p></div>
+    <button class="refresh-button" type="button" (click)="loadReports()" aria-label="Refresh reports"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 5v4h4M4 13a8.1 8.1 0 0 0 15.5 2M20 19v-4h-4" /></svg> Refresh</button>
+  </div>
+  @if (isLoading) { <div class="empty-state"><span class="loader"></span><p>Connecting to telemetry service...</p></div> }
+  @else if (hasError) { <div class="empty-state error-state"><span class="empty-icon">!</span><h2>Could not reach the reports service</h2><p>Check the API configuration and make sure the service is running.</p><button class="primary-button" type="button" (click)="loadReports()">Try again</button></div> }
+  @else if (reports.length === 0) { <div class="empty-state"><span class="empty-icon">—</span><h2>No reports yet</h2><p>New player feedback will appear here as soon as it arrives.</p></div> }
+  @else {
+    <div class="reports-list">
+      @for (report of reports; track trackReport($index, report)) {
+        <a class="report-card" [routerLink]="['/reports', report.uuid]">
+          <div class="report-card-header"><div class="report-id"><span class="report-badge">REPORT</span><span>{{ report.uuid.slice(0, 8) }}</span></div><span class="version-chip">v{{ report.gameVersion }}</span></div>
+          <h2>{{ report.summary }}</h2><p class="report-description">{{ report.description }}</p>
+          <div class="report-meta"><span><b>OS</b>{{ report.os }}</span><span><b>CPU</b>{{ report.cpu }}</span><span><b>GPU</b>{{ report.gpu }}</span><span><b>RAM</b>{{ report.ram }} GB</span></div>
+        </a>
+      }
+    </div>
+  }
+</section>

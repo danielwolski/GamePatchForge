@@ -14,7 +14,8 @@ class KafkaEventConsumer {
 
     private final ReportService reportService;
 
-    @KafkaListener(topics = "${app.kafka.topics.bug-reports}",
+    @KafkaListener(
+            topics = "${app.kafka.topics.bug-reports}",
             properties = {"spring.json.value.default.type=com.danielwolski.devboard.kafka.events.BugReportReceivedEvent"})
     void onBugReportReceived(BugReportReceivedEvent bugReportReceivedEvent){
         log.info("Received event with description {}", bugReportReceivedEvent.getDescription());

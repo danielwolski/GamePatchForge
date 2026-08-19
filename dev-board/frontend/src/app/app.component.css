@@ -1,0 +1,70 @@
+:host {
+  display: block;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+}
+
+.topbar,
+.page-content {
+  width: min(1100px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.topbar {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.main-nav {
+  display: flex;
+  gap: 4px;
+  height: 68px;
+}
+
+.main-nav a {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.main-nav a.active {
+  color: var(--ink);
+  border-bottom-color: var(--coral);
+}
+
+.page-content {
+  flex: 1;
+}
+
+@media (max-width: 760px) {
+  .topbar,
+  .page-content {
+    width: calc(100% - 28px);
+  }
+
+  .main-nav {
+    margin-left: auto;
+  }
+
+  .main-nav a {
+    padding: 0 8px;
+  }
+}

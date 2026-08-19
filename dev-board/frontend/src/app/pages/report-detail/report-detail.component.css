@@ -1,0 +1,155 @@
+.report-detail-view {
+  padding: 55px 0 70px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  color: var(--coral);
+  font: 11px var(--mono);
+  text-transform: uppercase;
+}
+
+.eyebrow-line {
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+}
+
+.back-link {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--muted);
+  font: 12px var(--mono);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--coral);
+}
+
+.back-link span {
+  color: var(--coral);
+  font-size: 16px;
+}
+
+.detail-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 40px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-heading h1 {
+  max-width: 800px;
+  margin: 0;
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+}
+
+.detail-id {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font: 11px var(--mono);
+}
+
+.large-chip {
+  padding: 8px 10px;
+  border: 1px solid var(--teal);
+  font: 12px var(--mono);
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.description-panel,
+.hardware-panel {
+  padding: 22px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.panel-label {
+  margin: 0 0 22px;
+  color: var(--coral);
+  font: 11px var(--mono);
+  text-transform: uppercase;
+}
+
+.full-description {
+  max-width: 650px;
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.hardware-panel dl {
+  margin: 0;
+}
+
+.hardware-panel dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.hardware-panel dt {
+  color: var(--muted);
+  font: 11px var(--mono);
+}
+
+.hardware-panel dd {
+  margin: 0;
+  font: 12px var(--mono);
+  text-align: right;
+}
+
+.report-detail-view .empty-state {
+  min-height: 350px;
+}
+
+@media (max-width: 760px) {
+  .report-detail-view {
+    padding-top: 40px;
+  }
+
+  .detail-heading {
+    display: block;
+    margin-top: 30px;
+  }
+
+  .large-chip {
+    display: inline-block;
+    margin-top: 18px;
+  }
+
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .full-description {
+    font-size: 20px;
+  }
+
+  .hardware-panel dl div {
+    display: block;
+  }
+
+  .hardware-panel dd {
+    margin-top: 5px;
+    text-align: left;
+  }
+}
