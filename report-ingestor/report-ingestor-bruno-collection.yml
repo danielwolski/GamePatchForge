@@ -57,3 +57,5 @@ extensions:
       - .git
     exportedAt: '2026-07-27T21:41:02.750Z'
     exportedUsing: Bruno
+
+#add application/json to content type for main body
