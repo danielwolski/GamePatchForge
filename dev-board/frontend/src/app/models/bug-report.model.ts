@@ -7,4 +7,5 @@ export interface BugReport {
   cpu: string;
   gpu: string;
   ram: number;
+  fileUrls: string[];
 }

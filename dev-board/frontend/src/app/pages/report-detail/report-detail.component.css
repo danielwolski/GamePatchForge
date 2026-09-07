@@ -94,6 +94,46 @@
   line-height: 1.4;
 }
 
+.attachments-panel {
+  margin-top: 14px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.attachment-list {
+  display: grid;
+  gap: 8px;
+}
+
+.attachment-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font: 12px var(--mono);
+  text-decoration: none;
+}
+
+.attachment-link:hover {
+  border-color: var(--coral);
+  color: var(--coral);
+}
+
+.attachment-icon {
+  color: var(--coral);
+  font-size: 16px;
+}
+
+.attachment-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .hardware-panel dl {
   margin: 0;
 }

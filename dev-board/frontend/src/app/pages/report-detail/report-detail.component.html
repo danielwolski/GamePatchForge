@@ -8,5 +8,18 @@
       <article class="description-panel"><p class="panel-label">Player description</p><p class="full-description">{{ report.description }}</p></article>
       <section class="hardware-panel"><p class="panel-label">Environment snapshot</p><dl><div><dt>Operating system</dt><dd>{{ report.os }}</dd></div><div><dt>Processor</dt><dd>{{ report.cpu }}</dd></div><div><dt>Graphics card</dt><dd>{{ report.gpu }}</dd></div><div><dt>Memory</dt><dd>{{ report.ram }} GB RAM</dd></div><div><dt>Game version</dt><dd>{{ report.gameVersion }}</dd></div></dl></section>
     </div>
+    @if (report.fileUrls.length) {
+      <section class="attachments-panel">
+        <p class="panel-label">Attachments</p>
+        <div class="attachment-list">
+          @for (fileUrl of report.fileUrls; track fileUrl) {
+            <a class="attachment-link" [href]="fileUrl" target="_blank" rel="noopener noreferrer">
+              <span class="attachment-icon">↗</span>
+              <span class="attachment-name">{{ fileUrl.split('/').pop() || 'Attached file' }}</span>
+            </a>
+          }
+        </div>
+      </section>
+    }
   }
 </section>

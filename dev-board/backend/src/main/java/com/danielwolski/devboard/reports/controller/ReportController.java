@@ -1,5 +1,6 @@
 package com.danielwolski.devboard.reports.controller;
 
+import com.danielwolski.devboard.reports.dto.BugReportDetailsDto;
 import com.danielwolski.devboard.reports.service.ReportService;
 import com.danielwolski.devboard.reports.dto.BugReportDto;
 import lombok.RequiredArgsConstructor;
@@ -18,5 +19,10 @@ public class ReportController {
     @GetMapping
     public List<BugReportDto> getReports() {
         return reportService.getBugReportDtos();
+    }
+
+    @GetMapping("/{uuid}")
+    public BugReportDetailsDto getReportDetails(@PathVariable  String uuid) {
+        return reportService.getBugReportDetailsDto(uuid);
     }
 }
